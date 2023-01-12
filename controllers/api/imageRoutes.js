@@ -1,11 +1,19 @@
 const router = require("express").Router();
 const { Image } = require("../../models");
 
-router.get("/", async (req, res) => {
+router.get("/public", async (req, res) => {
     try {
-        res.json(await Image.findAll())
+        const publicImages = await Image.findAll({
+            where: {
+                public: true
+            }
+        });
+
+        if (!publicImages[0]) res.status(404).json({message: 'No public images found...?'})
+
+        res.status(200).json(publicImages)
     } catch (err) {
-        res.json(err)
+        res.status(500).json(err)
     }
 });
 
