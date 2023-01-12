@@ -12,7 +12,7 @@ Image.init(
       autoIncrement: true,
     },
     url: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
