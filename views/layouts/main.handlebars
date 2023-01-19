@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Drawer</title>
   <link rel="stylesheet" href="/css/jass.css">
+  <script src="/js/jquery-1.8.2.js"></script>
+  {{#if logged_in}}
+  <script src="/js/logout.js" defer></script>
+  {{/if}}
   {{#if canvas}}
   {{> headers/canvasHeader}}
   {{/if}}
@@ -19,15 +23,8 @@
     {{/if}}
   </header>
   <main class="container container-fluid mt-5">
-    {{{ body }}}
+    {{ body }}
   </main>
-  <footer>
-      
-  </footer>
-
-  {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
 </body>
 
 </html>
