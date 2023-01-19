@@ -38,4 +38,14 @@ router.post("/save", async (req, res) => {
   }
 });
 
+router.get("/download/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const image = await Image.findByPk(id);
+    res.status(200).json(image);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
