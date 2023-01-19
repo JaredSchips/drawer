@@ -11,12 +11,11 @@ Image.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    url: {
-      type: DataTypes.STRING,
+    snapshot: {
+      type: DataTypes.JSON,
       allowNull: false,
-      unique: true,
     },
-    public: {
+    is_public: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
