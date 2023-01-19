@@ -18,4 +18,24 @@ router.get("/public", async (req, res) => {
   }
 });
 
+router.post("/save", async (req, res) => {
+  try {
+    const snapshot = req.body.snapshot;
+    const isPublic = req.body.isPublic;
+    const userId = req.body.userId;
+
+    console.log(req.body);
+
+    Image.create({
+      snapshot: snapshot,
+      is_public: isPublic,
+      user_id: userId,
+    });
+
+    res.status(200).json({ message: "success!" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
