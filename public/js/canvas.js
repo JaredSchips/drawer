@@ -15,7 +15,7 @@ var lc = LC.init(document.getElementById("lc"), {
   strokeWidths: [1, 2, 3, 5, 30],
 });
 
-async function saveAs(title, isPublic, userId) {
+async function saveAs(title, isPublic) {
   const response = await fetch("/api/images/save-as", {
     method: "POST",
     headers: {
@@ -25,14 +25,13 @@ async function saveAs(title, isPublic, userId) {
       title: title,
       snapshot: lc.getSnapshot(),
       isPublic: isPublic,
-      userId: userId,
     }),
   });
   const responseId = (await response.json()).id;
-  window.currentDrawingId = id
+  window.currentDrawingId = responseId
 }
 
-async function saveOver(id, title, isPublic, userId) {
+async function saveOver(id, title, isPublic) {
   await fetch("/api/images/save-over", {
     method: "POST",
     headers: {
@@ -43,7 +42,6 @@ async function saveOver(id, title, isPublic, userId) {
       title: title,
       snapshot: lc.getSnapshot(),
       isPublic: isPublic,
-      userId: userId,
     }),
   });
   window.currentDrawingId = id
@@ -60,7 +58,7 @@ async function load(id) {
 $("[data-action=save-as]").click(async (e) => {
   e.preventDefault();
   const title = prompt("Name your drawing:");
-  await saveAs(title, true, 1)
+  await saveAs(title, true)
 });
 
 $("[data-action=save]").click(async (e) => {

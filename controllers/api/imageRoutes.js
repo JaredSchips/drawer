@@ -23,7 +23,12 @@ router.post("/save-as", async (req, res) => {
     const title = req.body.title;
     const snapshot = req.body.snapshot;
     const isPublic = req.body.isPublic;
-    const userId = req.body.userId;
+    const userId = req.session.userId;
+
+    if (!userId) {
+      res.status(400).json({ message: "Must be logged in to upload image" });
+      return;
+    }
 
     const newImage = await Image.create({
       title: title,
@@ -46,7 +51,18 @@ router.post("/save-over", async (req, res) => {
     const title = req.body.title;
     const snapshot = req.body.snapshot;
     const isPublic = req.body.isPublic;
-    const userId = req.body.userId;
+    const userId = req.session.userId
+
+    if (!userId) {
+      res.status(400).json({message: 'Must be logged in to upload image'})
+      return
+    }
+
+    const uploaderId = (await Image.findByPk(id)).dataValues.user_id
+    if (userId!==uploaderId) {
+      res.status(400).json({message: 'Image cannot be edited as current user'})
+      return
+    }
 
     Image.update({
       title: title,
