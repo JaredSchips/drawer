@@ -11,6 +11,11 @@ Image.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [32]
+    },
     snapshot: {
       type: DataTypes.JSON,
       allowNull: false,

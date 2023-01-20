@@ -5,7 +5,7 @@ router.get("/public", async (req, res) => {
   try {
     const publicImages = await Image.findAll({
       where: {
-        public: true,
+        is_public: true,
       },
     });
 
@@ -18,21 +18,47 @@ router.get("/public", async (req, res) => {
   }
 });
 
-router.post("/save", async (req, res) => {
+router.post("/save-as", async (req, res) => {
   try {
+    const title = req.body.title;
     const snapshot = req.body.snapshot;
     const isPublic = req.body.isPublic;
     const userId = req.body.userId;
 
-    console.log(req.body);
-
-    Image.create({
+    const newImage = await Image.create({
+      title: title,
       snapshot: snapshot,
       is_public: isPublic,
       user_id: userId,
     });
 
-    res.status(200).json({ message: "success!" });
+    const newId = newImage.dataValues.id
+
+    res.status(200).json({ id: newId });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post("/save-over", async (req, res) => {
+  try {
+    const id = req.body.id
+    const title = req.body.title;
+    const snapshot = req.body.snapshot;
+    const isPublic = req.body.isPublic;
+    const userId = req.body.userId;
+
+    Image.update({
+      title: title,
+      snapshot: snapshot,
+      is_public: isPublic,
+      user_id: userId,
+    },
+    {
+      where: {id: id}
+    });
+
+    res.status(200).json({ id: id });
   } catch (err) {
     res.status(500).json(err);
   }
