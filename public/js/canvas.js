@@ -1,5 +1,5 @@
 const imageSize = { width: 500, height: 500 };
-window.currentDrawingId = 0
+window.currentDrawingId = 0;
 var imageBounds = {
   x: 0,
   y: 0,
@@ -28,7 +28,7 @@ async function saveAs(title, isPublic) {
     }),
   });
   const responseId = (await response.json()).id;
-  window.currentDrawingId = responseId
+  window.currentDrawingId = responseId;
 }
 
 async function saveOver(id, title, isPublic) {
@@ -44,31 +44,32 @@ async function saveOver(id, title, isPublic) {
       isPublic: isPublic,
     }),
   });
-  window.currentDrawingId = id
-  console.log(`Saved drawing as ${title}`)
+  window.currentDrawingId = id;
+  console.log(`Saved drawing as ${title}`);
 }
 
 async function load(id) {
   const response = await $.ajax(`/api/images/download/${id}`);
   const snapshot = response.snapshot;
   lc.loadSnapshot(snapshot);
-  window.currentDrawingId = id
+  window.currentDrawingId = id;
 }
 
-$("[data-action=save-as]").click(async (e) => {
+$("#save-as").click(async (e) => {
   e.preventDefault();
   const title = prompt("Name your drawing:");
-  await saveAs(title, true)
+  const public = document.getElementById("public").checked;
+  saveAs(title, public);
 });
 
-$("[data-action=save]").click(async (e) => {
+$("#save").click(async (e) => {
   e.preventDefault();
+
   const title = prompt("Name your drawing:");
-  await saveOver(window.currentDrawingId, title, true, 1);
-});
+  const public = document.getElementById("public").checked;
+  if (!window.currentDrawingId) {
+    saveAs(title, public);
+  }
 
-$("[data-action=load]").click(async (e) => {
-  e.preventDefault();
-  const id = document.getElementById("load-form").value;
-  load(id)
+  saveOver(window.currentDrawingId, title, public);
 });
