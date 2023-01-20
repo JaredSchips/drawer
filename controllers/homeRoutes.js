@@ -2,6 +2,16 @@ const router = require("express").Router();
 const { User } = require("../models");
 const withAuth = require("../utils/auth");
 
+router.get("/", (req, res) => {
+  try {
+    res.render("homepage", {
+      logged_in: req.session.loggedIn,
+    })
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
 router.get("/draw", async (req, res) => {
   try {
     res.status(200).render("canvas", {
@@ -29,7 +39,7 @@ router.get("/users", withAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+  });
 
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {
