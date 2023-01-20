@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Image } = require('../../models');
 
 router.post('/login', async (req, res) => {
   try {
@@ -22,8 +22,8 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
+      req.session.userId = userData.id;
+      req.session.loggedIn = true;
       
       res.json({ user: userData, message: 'You are now logged in!' });
     });
@@ -37,8 +37,6 @@ router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
       username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
     });
 
     req.session.save(() => {
@@ -53,7 +51,7 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
+  if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
     });
@@ -61,5 +59,30 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
+router.get('/info', async (req,res) => {
+  try {
+    const user = (await User.findByPk(req.session.user_id))
+    if (!user) {
+      res.json({id: 0, username: 'Guest', email: null})
+      return
+    }
+    user = user.dataValues
+    delete user.password
+    console.log(user)
+    res.json(user)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err);
+  }
+})
+
+router.get('/:userId/drawings', async (req, res) => {
+  const requirements = {user_id: req.params.userId}
+  if (req.params.userId!==req.session.userId) requirements.public = true
+  const userDrawings = await Image.findAll({ where: requirements })
+  console.log(userDrawings)
+  res.status(200).json(userDrawings)
+})
 
 module.exports = router;

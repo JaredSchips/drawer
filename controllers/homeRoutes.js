@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
   }
 })
 
-router.get("/draw", async (req, res) => {
+router.get("/draw", withAuth, (req, res) => {
   try {
     res.status(200).render("canvas", {
       canvas: true,
@@ -34,7 +34,7 @@ router.get("/users", withAuth, async (req, res) => {
 
     res.render("homepage", {
       users,
-      logged_in: req.session.logged_in,
+      logged_in: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -42,7 +42,7 @@ router.get("/users", withAuth, async (req, res) => {
   });
 
 router.get("/login", (req, res) => {
-  if (req.session.logged_in) {
+  if (req.session.loggedIn) {
     res.redirect("/");
     return;
   }
