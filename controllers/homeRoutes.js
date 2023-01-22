@@ -6,7 +6,8 @@ router.get("/", (req, res) => {
   try {
     res.render("homepage", {
       logged_in: req.session.loggedIn,
-    })
+      userData: req.body.userData,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -17,29 +18,45 @@ router.get("/draw", withAuth, (req, res) => {
     res.status(200).render("canvas", {
       canvas: true,
       logged_in: req.session.logged_in,
+      userData: req.body.userData,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get("/users", withAuth, async (req, res) => {
+router.get("/profile", withAuth, (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ["password"] },
-      order: [["name", "ASC"]],
-    });
+    res.status(200).render("profile", {
+      loggedIn: req.session.loggedIn,
+      userData: req.session.userData,
+    })
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
 
-    const users = userData.map((project) => project.get({ plain: true }));
-
-    res.render("homepage", {
-      users,
-      logged_in: req.session.loggedIn,
+router.get("/profile/:userId", withAuth, (req, res) => {
+  try {
+    res.status(200).render("profile", {
+      loggedIn: req.session.loggedIn,
+      userData: req.body.userData,
     });
   } catch (err) {
     res.status(500).json(err);
   }
-  });
+});
+
+router.get("/images/:imageId", withAuth, (req, res) => {
+  try {
+    res.status(200).render("image", {
+      loggedIn: req.session.loggedIn,
+      userData: req.body.userData,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
