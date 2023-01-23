@@ -17,21 +17,27 @@ nav {
 main {  
     color: #515151;  
     text-align: center;  
-    line-height: 300px;  
+    line-height: 100px;  
     padding:0;  
     margin:0;  
 } 
 
 #hero {
     text-align: center;
-    padding-top: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
+
 img {
     border-radius:105px;
+    width: 400px;
+    height: auto;
 }
+
 h1 {
     font-size: 50px;
 }
+
 a {
     color: #515151;
 }
@@ -39,4 +45,52 @@ a {
 a:hover {
     color:rgb(43, 43, 43);
     text-decoration: none;
+}
+
+#others {
+    padding: 0px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#pictures{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 75px;
+}
+
+#pictures img[src="/assets/lc-images/superhero.jpeg"] {
+    border: 5px solid #515151;
+    border-radius: 0px;
+    width: 350px;
+    height: 350px;
+}
+
+#pictures img[src="/assets/lc-images/beach.jpg"] {
+    border: 5px solid #515151;
+    border-radius: 0px;
+    width: 350px;
+    height: 350px;
+}
+
+#pictures img[src="/assets/lc-images/house.jpg"] {
+    border: 5px solid #515151;
+    border-radius: 0px;
+    width: 350px;
+    height: 350px;
+}
+
+#pictures img[src="/assets/lc-images/study.jpeg"] {
+    border: 5px solid #515151;
+    border-radius: 0px;
+    width: 350px;
+    height: 350px;
+}
+
+#pictures img[src="/assets/lc-images/stickDrawing.png"] {
+    border: 5px solid #515151;
+    border-radius: 0px;
+    width: 350px;
+    height: 350px;
 }
