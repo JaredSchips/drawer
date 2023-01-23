@@ -9,7 +9,6 @@ var imageBounds = {
 
 var lc = LC.init(document.getElementById("lc"), {
   imageURLPrefix: "/assets/lc-images",
-  imageSize: imageSize,
   toolbarPosition: "bottom",
   defaultStrokeWidth: 2,
   strokeWidths: [1, 2, 3, 5, 30],

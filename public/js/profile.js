@@ -7,9 +7,11 @@ for (div of pictureDivArr) {
     console.log(userImages)
     console.log(imgId)
     const snapshot = userImages
-        .filter(imgObj => imgObj.id == 7)[0]
+        .filter(imgObj => imgObj.id == imgId)[0]
         .snapshot
     console.log(snapshot)
-    const canvas = LC.renderSnapshotToImage(snapshot)
+    const canvas = LC.renderSnapshotToImage(snapshot, {
+      margin: { top: 1, right: 1, bottom: 1, left: 1 },
+    });
     a.prepend(canvas)
 };

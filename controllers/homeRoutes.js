@@ -4,11 +4,11 @@ const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    const publicImages = (await Image.findAll({
+    const publicImageSearchResults = (await Image.findAll({
       where: { is_public: true },
       include: User
     })).map(imageObj => {return {dataValues: imageObj.dataValues, user: imageObj.user.dataValues}})
-    publicImages.splice(5)
+    const publicImages = publicImageSearchResults.slice(-5).reverse();
 
     res.render("homepage", {
       loggedIn: req.session.loggedIn,
