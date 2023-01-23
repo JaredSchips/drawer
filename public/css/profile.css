@@ -1,17 +1,12 @@
 h1 { 
-
     color: #515151; 
-
     text-align: center; 
-
     font-size: 50px;  
-
     padding-bottom: 100px;   
 
 } 
 
 #pictures{ 
-
     display: flex;
     flex-wrap: wrap; 
     align-items: center; 
@@ -20,77 +15,37 @@ h1 {
 
 } 
 
- 
- 
-
 #pictures img[src="/assets/lc-images/superhero.jpeg"] { 
-
     border: 5px solid #515151; 
-
     border-radius: 0px; 
-
     width: 350px; 
-
     height: 350px; 
-
 } 
-
- 
- 
 
 #pictures img[src="/assets/lc-images/beach.jpg"] { 
-
     border: 5px solid #515151; 
-
     border-radius: 0px; 
-
     width: 350px; 
-
     height: 350px; 
-
 } 
-
- 
- 
 
 #pictures img[src="/assets/lc-images/house.jpg"] { 
-
     border: 5px solid #515151; 
-
     border-radius: 0px; 
-
     width: 350px; 
-
     height: 350px; 
-
 } 
-
- 
- 
 
 #pictures img[src="/assets/lc-images/study.jpeg"] { 
-
     border: 5px solid #515151; 
-
     border-radius: 0px; 
-
     width: 350px; 
-
     height: 350px; 
-
 } 
 
- 
- 
-
 #pictures img[src="/assets/lc-images/stickDrawing.png"] { 
-
     border: 5px solid #515151; 
-
     border-radius: 0px; 
-
     width: 350px; 
-
     height: 350px; 
-
 } 
