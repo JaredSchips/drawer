@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../models");
+const { User, Image } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", (req, res) => {
@@ -50,15 +50,16 @@ router.get("/profile/:userId", withAuth, async (req, res) => {
 
 router.get("/images/:imageId", withAuth, async (req, res) => {
   try {
-    const id = req.params.Imageid;
+    const id = req.params.imageId;
     const image = await Image.findByPk(id);
     res.render("image", {
       loggedIn: req.session.loggedIn,
       userData: req.body.userData,
-      image: image
+      image: image.dataValues
     });
   } catch (err) {
     res.status(500).json(err);
+    console.log(err)
   }
 });
 

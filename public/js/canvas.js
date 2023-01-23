@@ -69,6 +69,7 @@ $("#save").click(async (e) => {
   const public = document.getElementById("public").checked;
   if (!window.currentDrawingId) {
     saveAs(title, public);
+    return
   }
 
   saveOver(window.currentDrawingId, title, public);

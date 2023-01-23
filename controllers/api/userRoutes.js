@@ -39,13 +39,15 @@ router.post('/login', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const dbUserData = await User.create({
+    const dbUserData = (await User.create({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password
-    });
+    })).dataValues
 
     req.session.save(() => {
+      req.session.userData = dbUserData;
+      req.session.userId = dbUserData.id
       req.session.loggedIn = true;
 
       res.json(dbUserData);
