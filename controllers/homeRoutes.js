@@ -51,11 +51,12 @@ router.get("/profile/:userId", withAuth, async (req, res) => {
 router.get("/images/:imageId", withAuth, async (req, res) => {
   try {
     const id = req.params.imageId;
-    const image = await Image.findByPk(id);
+    const image = await Image.findByPk(id, {include: User});
     res.render("image", {
       loggedIn: req.session.loggedIn,
       userData: req.body.userData,
-      image: image.dataValues
+      image: image.dataValues,
+      author: image.user.dataValues
     });
   } catch (err) {
     res.status(500).json(err);
