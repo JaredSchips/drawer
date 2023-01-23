@@ -23,9 +23,6 @@ router.post('/login', async (req, res) => {
 
     userData = userData.dataValues
     delete userData.password
-    console.log(
-      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-    );
     req.session.save(() => {
       req.session.userData = userData;
       req.session.userId = userData.id
