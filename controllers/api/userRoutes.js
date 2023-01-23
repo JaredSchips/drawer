@@ -87,7 +87,7 @@ router.get('/info', async (req,res) => {
 
 router.get('/:userId/drawings', async (req, res) => {
   const requirements = {user_id: req.params.userId}
-  if (req.params.userId!==req.session.userId) requirements.public = true
+  if (req.params.userId!==req.session.userId) requirements.is_public = true
   const userDrawings = await Image.findAll({ where: requirements })
   res.json(userDrawings)
 })
