@@ -1,9 +1,7 @@
-{{ image.id }}
-<div class="fs-container">
-    <div class="lc" id="lc"></div>
-</div>
+<script src="/js/image.js" defer></script>
+
+<div class="image-container"></div>
 
 <script>
     const snapshot = {{{ stringify image.snapshot }}}
-    lc.renderSnapshotToImage(snapshot)
 </script>
