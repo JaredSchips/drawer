@@ -5,12 +5,15 @@ router.get("/public", async (req, res) => {
   try {
     const publicImages = await Image.findAll({ where: {is_public: true} });
 
-    if (!publicImages[0])
+    if (!publicImages[0]) {
       res.status(404).json({ message: "No public images found...?" });
+      return
+    }
 
     res.json(publicImages);
   } catch (err) {
     res.status(500).json(err);
+    console.log(err)
   }
 });
 

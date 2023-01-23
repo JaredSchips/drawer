@@ -16,7 +16,6 @@ router.get("/", (req, res) => {
 router.get("/draw", withAuth, (req, res) => {
   try {
     res.render("canvas", {
-      canvas: true,
       loggedIn: req.session.loggedIn,
       userData: req.body.userData,
     });
