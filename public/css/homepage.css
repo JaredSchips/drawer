@@ -36,6 +36,8 @@ img {
 
 h1 {
     font-size: 50px;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 
 a {
@@ -49,8 +51,9 @@ a:hover {
 
 #others {
     padding: 0px;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
+    font-family: sans-serif;
 }
 
 #pictures{
@@ -60,37 +63,15 @@ a:hover {
     gap: 75px;
 }
 
-#pictures img[src="/assets/lc-images/superhero.jpeg"] {
-    border: 5px solid #515151;
-    border-radius: 0px;
+#pictures canvas {
     width: 350px;
     height: 350px;
+    border: 5px solid #515151;
+    background-color: white;  
 }
 
-#pictures img[src="/assets/lc-images/beach.jpg"] {
-    border: 5px solid #515151;
-    border-radius: 0px;
-    width: 350px;
-    height: 350px;
-}
-
-#pictures img[src="/assets/lc-images/house.jpg"] {
-    border: 5px solid #515151;
-    border-radius: 0px;
-    width: 350px;
-    height: 350px;
-}
-
-#pictures img[src="/assets/lc-images/study.jpeg"] {
-    border: 5px solid #515151;
-    border-radius: 0px;
-    width: 350px;
-    height: 350px;
-}
-
-#pictures img[src="/assets/lc-images/stickDrawing.png"] {
-    border: 5px solid #515151;
-    border-radius: 0px;
-    width: 350px;
-    height: 350px;
+#pictures a {
+    color: #515151;
+    font-size: 30px;
+    font-family: sans-serif;
 }
