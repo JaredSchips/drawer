@@ -19,7 +19,7 @@
 <div id="pictures">
   {{#each publicImages as |image|}}
     <div data-img-id="{{ image.dataValues.id }}">
-      <a href="/images/{{ image.dataValues.id }}">{{ image.dataValues.title }}</a>
+      <a href="/images/{{ image.dataValues.id }}"><p>{{ image.dataValues.title }}</p></a>
     </div>
   {{/each}}
 </div>

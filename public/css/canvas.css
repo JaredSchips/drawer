@@ -3,7 +3,9 @@ form {
     padding-left: 100px;  
     font-size: 20px;  
     color: #515151;  
-    font-family: sans-serif;  
+    font-family: sans-serif;
+    width: fit-content;
+    margin: auto;
 }  
 
 form label {  

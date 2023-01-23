@@ -1,4 +1,4 @@
-const imageSize = { width: 500, height: 500 };
+const imageSize = { width: 1000, height: 1000 };
 window.currentDrawingId = 0;
 var imageBounds = {
   x: 0,
