@@ -5,40 +5,18 @@ const withAuth = require("../utils/auth");
 router.get("/", (req, res) => {
   try {
     res.render("homepage", {
-      logged_in: req.session.loggedIn,
+      loggedIn: req.session.loggedIn,
       userData: req.body.userData,
     });
   } catch (err) {
     res.status(500).json(err);
   }
-})
+});
 
 router.get("/draw", withAuth, (req, res) => {
   try {
-    res.status(200).render("canvas", {
+    res.render("canvas", {
       canvas: true,
-      logged_in: req.session.logged_in,
-      userData: req.body.userData,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get("/profile", withAuth, (req, res) => {
-  try {
-    res.status(200).render("profile", {
-      loggedIn: req.session.loggedIn,
-      userData: req.session.userData,
-    })
-  } catch (err) {
-    res.status(500).json(err)
-  }
-})
-
-router.get("/profile/:userId", withAuth, (req, res) => {
-  try {
-    res.status(200).render("profile", {
       loggedIn: req.session.loggedIn,
       userData: req.body.userData,
     });
@@ -47,16 +25,42 @@ router.get("/profile/:userId", withAuth, (req, res) => {
   }
 });
 
-router.get("/images/:imageId", withAuth, (req, res) => {
+router.get("/profile", withAuth, async (req, res) => {
   try {
-    res.status(200).render("image", {
+    res.redirect(`/profile/${req.session.userId}`);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/profile/:userId", withAuth, async (req, res) => {
+  try {
+    const requirements = {user_id: req.params.userId}
+    if (req.params.userId!==req.session.userId) requirements.public = true
+    const userDrawings = await Image.findAll({ where: requirements })
+    res.render("profile", {
       loggedIn: req.session.loggedIn,
       userData: req.body.userData,
+      userDrawings: userDrawings
     });
   } catch (err) {
     res.status(500).json(err);
   }
-})
+});
+
+router.get("/images/:imageId", withAuth, async (req, res) => {
+  try {
+    const id = req.params.Imageid;
+    const image = await Image.findByPk(id);
+    res.render("image", {
+      loggedIn: req.session.loggedIn,
+      userData: req.body.userData,
+      image: image
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {

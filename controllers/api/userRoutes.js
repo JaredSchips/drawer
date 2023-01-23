@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
 
-      res.status(200).json(dbUserData);
+      res.json(dbUserData);
     });
   } catch (err) {
     console.log(err);
@@ -87,8 +87,7 @@ router.get('/:userId/drawings', async (req, res) => {
   const requirements = {user_id: req.params.userId}
   if (req.params.userId!==req.session.userId) requirements.public = true
   const userDrawings = await Image.findAll({ where: requirements })
-  console.log(userDrawings)
-  res.status(200).json(userDrawings)
+  res.json(userDrawings)
 })
 
 module.exports = router;
