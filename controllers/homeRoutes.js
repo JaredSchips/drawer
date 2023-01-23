@@ -42,12 +42,13 @@ router.get("/profile", withAuth, async (req, res) => {
 router.get("/profile/:userId", withAuth, async (req, res) => {
   try {
     const requirements = {user_id: req.params.userId}
-    if (req.params.userId!==req.session.userId) requirements.is_public = true
-    const userDrawings = await Image.findAll({ where: requirements })
+    if (req.params.userId!=req.session.userId) requirements.is_public = true
+    const userImages = await Image.findAll({ where: requirements })
+    console.log(userImages)
     res.render("profile", {
       loggedIn: req.session.loggedIn,
       userData: req.body.userData,
-      userDrawings: userDrawings
+      userImages: userImages
     });
   } catch (err) {
     res.status(500).json(err);
