@@ -2,11 +2,18 @@ const router = require("express").Router();
 const { User, Image } = require("../models");
 const withAuth = require("../utils/auth");
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
+    const publicImages = (await Image.findAll({
+      where: { is_public: true },
+      include: User
+    })).map(imageObj => {return {dataValues: imageObj.dataValues, user: imageObj.user.dataValues}})
+    publicImages.splice(5)
+
     res.render("homepage", {
       loggedIn: req.session.loggedIn,
       userData: req.body.userData,
+      publicImages: publicImages
     });
   } catch (err) {
     res.status(500).json(err);

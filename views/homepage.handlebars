@@ -1,4 +1,9 @@
 <link rel="stylesheet" href="/css/homepage.css">
+<script src="/js/homepage.js" defer></script>
+
+<script>
+    const publicImages = {{{ stringify publicImages }}}
+</script>
 
 <div id="hero">
   <a href="/draw">
@@ -9,22 +14,12 @@
 
 <div id="others">
   <p1>Or see what other people have made:</p1>
-  </div>
+</div>
 
-  <div id="pictures">
-    <div>
-      <a href="/views/Image.handlebars"><img src="/assets/lc-images/superhero.jpeg" alt="superhero"></a>
-      </div>
-    <div>
-      <img src="/assets/lc-images/beach.jpg" alt="beach">
+<div id="pictures">
+  {{#each publicImages as |image|}}
+    <div data-img-id="{{ image.dataValues.id }}">
+      <a href="/images/{{ image.dataValues.id }}">{{ image.dataValues.title }}</a>
     </div>
-    <div>
-      <img src="/assets/lc-images/house.jpg" alt="house">
-      </div>
-    <div>
-      <img src="/assets/lc-images/study.jpeg" alt="study">
-      </div>
-    <div>
-      <img src="/assets/lc-images/stickDrawing.png" alt="stickDrawing">
-      </div>   
+  {{/each}}
 </div>
